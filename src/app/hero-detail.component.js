@@ -12,6 +12,7 @@ var core_1 = require("@angular/core");
 var hero_service_1 = require("./hero.service");
 var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
+require("rxjs/add/operator/switchMap");
 var HeroDetailComponent = (function () {
     function HeroDetailComponent(heroService, route, location) {
         this.heroService = heroService;
@@ -26,6 +27,11 @@ var HeroDetailComponent = (function () {
     };
     HeroDetailComponent.prototype.goBack = function () {
         this.location.back();
+    };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
     };
     return HeroDetailComponent;
 }());
